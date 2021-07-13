@@ -29,6 +29,7 @@ public class ProcessHelpers {
         this.processList = new ArrayList<>();
         this.processBuilder = new ArrayList<>();
         this.stubs = new ArrayList<>();
+
         
             init();
     }
@@ -48,8 +49,9 @@ public class ProcessHelpers {
 
             int id =noOfProcesses - 1;
             System.out.println("noOfProcesses:  " + noOfProcesses);
-            ProcessBuilder processBuilderInstance = new ProcessBuilder("java", "-cp", "file:/home/fadwa/Practice/bully/target/classes", "App.Main",
-                                ((Integer) id).toString() );
+            
+            ProcessBuilder processBuilderInstance = new ProcessBuilder("java", "-cp", "file:/home/fadwa/Practice/bully/target/classes", "ProcessEntryPoint.EntryPoint",
+                                ((Integer) id).toString());
             processBuilder.add(processBuilderInstance);
 
             processBuilder.get(id).redirectOutput(Redirect.INHERIT);
@@ -116,6 +118,20 @@ public class ProcessHelpers {
     
     public ArrayList<ProcessDataInterface> getStubs() {
             return stubs;
+    }
+    public int[] getIds(){
+        int[] Ids = new int[noOfProcesses];
+        try{
+            
+        
+        for(int i =0; i<noOfProcesses; i++){
+            Ids[i] = (stubs.get(i).getId());
+            
+        }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return Ids;
     }
 }
 

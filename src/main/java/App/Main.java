@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 package App;
-
-import BullyAlgorithm.Algorithm;
-
+import GUI.GUI;
 /**
  *
  * @author fadwa
  */
 public class Main {
-   public static void main(String[] arg) {
-       int currentId = Integer.parseInt(arg[0]);
-//            boolean coordinatorAlive = 
-            Algorithm bullyAlgorithm = new Algorithm(currentId);
-            bullyAlgorithm.startAlgorithm();
-    } 
+     public static void main(String[] args){
+         java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GUI().setVisible(true);
+            }
+        });
+       
+    }  
 }
