@@ -1,4 +1,4 @@
-#BULLY ALGORITHM
+# BULLY ALGORITHM
 
 - A GUI app that implements IPC via the bully algorithm.
 
