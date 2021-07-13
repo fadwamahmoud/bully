@@ -6,7 +6,6 @@
 package ProcessEntryPoint;
 
 import BullyAlgorithm.Algorithm;
-import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +15,6 @@ public class EntryPoint {
 
     public static void main(String[] arg) {
         int currentId = Integer.parseInt(arg[0]);
-        Algorithm bullyAlgorithm = new Algorithm(currentId);
+        Algorithm algorithm = new Algorithm(currentId);
     }
 }

@@ -4,18 +4,21 @@
  * and open the template in the editor.
  */
 package App;
+
 import GUI.GUI;
+
 /**
  *
  * @author fadwa
  */
 public class Main {
-     public static void main(String[] args){
-         java.awt.EventQueue.invokeLater(new Runnable() {
+
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new GUI().setVisible(true);
             }
         });
-       
-    }  
+    }
 }

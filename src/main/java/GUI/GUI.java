@@ -32,13 +32,13 @@ public class GUI extends javax.swing.JFrame {
                 displayMailbox(stubs);
             }
         };
-        timer.scheduleAtFixedRate(timerTask, 0, 5000);
+        timer.scheduleAtFixedRate(timerTask, 0, 2000);
     }
 
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        mailboxScrollPane = new javax.swing.JScrollPane();
+        mailboxTextArea = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         raise = new javax.swing.JButton();
         kill = new javax.swing.JButton();
@@ -48,9 +48,9 @@ public class GUI extends javax.swing.JFrame {
         title = new javax.swing.JLabel();
         selectMailbox = new javax.swing.JLabel();
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        mailboxTextArea.setColumns(20);
+        mailboxTextArea.setRows(5);
+        mailboxScrollPane.setViewportView(mailboxTextArea);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         raise.setText("Raise");
@@ -90,7 +90,7 @@ public class GUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(79, 79, 79)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(mailboxScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(mailboxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +126,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(mailboxLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(mailboxScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
@@ -171,7 +171,7 @@ public class GUI extends javax.swing.JFrame {
             if (selectProcess.getSelectedItem() != null) {
                 int id = (Integer) selectProcess.getSelectedItem();
                 String mailbox = processHelpers.getStubs().get(id).getMailboxToString();
-                jTextArea1.setText(mailbox);
+                mailboxTextArea.setText(mailbox);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -194,8 +194,8 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel title;
     private javax.swing.JLabel selectMailbox;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JScrollPane mailboxScrollPane;
+    private javax.swing.JTextArea mailboxTextArea;
     // End of variables declaration  
 
 }

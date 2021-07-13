@@ -57,20 +57,21 @@ public class Algorithm {
         }
     }
 
-    public void Election(ProcessDataInterface currentProcessData) {
+    private void Election(ProcessDataInterface currentProcessData) {
         try {
             int subsequentWins = 0;
             while (true) {
+                System.out.println("____________________________________________________________ ");
 
                 System.out.println("current process in election: " + currentId);
-
-                System.out.println("____________________________________________________________ ");
-                System.out.println(currentProcessData.getMailboxToString());
 
                 sendToLargerIds();
 
                 sleepFunction(2000);
 
+                System.out.println("subsequentWins inside conditon : " + subsequentWins);
+
+                // was 5000
                 replyOK(currentProcessData, 5000);
 
                 sleepFunction(2000);
@@ -116,7 +117,7 @@ public class Algorithm {
         return false;
     }
 
-    public void replyOK(ProcessDataInterface process, int timeInterval) {
+    private void replyOK(ProcessDataInterface process, int timeInterval) {
         try {
             LocalTime now = LocalTime.now();
             for (int i = process.getMailboxSize() - 1; i >= 0; i--) {
@@ -124,12 +125,14 @@ public class Algorithm {
                     break;
                 }
                 int toProcessId = process.shouldReplyOK(i);
+                System.out.println("should reply ok " + toProcessId);
                 if (toProcessId == -1) {
                     continue;
                 } else {
                     Registry registry = LocateRegistry.getRegistry(2000);
                     ProcessDataInterface skeleton = (ProcessDataInterface) registry.lookup("Reg" + ((Integer) toProcessId).toString());
                     skeleton.addToMailbox("OK", LocalTime.now(), process.getId());
+                    System.out.println("replied ok to: " + toProcessId);
                 }
             }
         } catch (Exception e) {
@@ -137,7 +140,7 @@ public class Algorithm {
         }
     }
 
-    public void sendToLargerIds() {
+    private void sendToLargerIds() {
         for (int i = currentId + 1; i < currentNoOfProcesses; i++) {
             try {
                 Registry registry = LocateRegistry.getRegistry(2000);
@@ -163,8 +166,8 @@ public class Algorithm {
             }
         }
     }
-   
-   public boolean isCoordinatorAlive(ProcessDataInterface currentProcessData) {
+
+    private boolean isCoordinatorAlive(ProcessDataInterface currentProcessData) {
         try {
             return currentProcessData.searchMailbox("COORDINATOR_ALIVE", 5000);
         } catch (Exception e) {
@@ -173,7 +176,7 @@ public class Algorithm {
         return false;
     }
 
-    public boolean didCoordinatorWin(ProcessDataInterface currentProcessData) {
+    private boolean didCoordinatorWin(ProcessDataInterface currentProcessData) {
         try {
             return currentProcessData.searchMailbox("WIN", 2000);
         } catch (Exception e) {
@@ -182,7 +185,7 @@ public class Algorithm {
         return false;
     }
 
-    void sleepFunction(long ms) {
+    private void sleepFunction(int ms) {
         try {
             TimeUnit.MILLISECONDS.sleep(ms);
         } catch (Exception e) {
