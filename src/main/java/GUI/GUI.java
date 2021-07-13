@@ -7,6 +7,7 @@ package GUI;
 
 import Process.ProcessDataInterface;
 import Process.ProcessHelpers;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -78,7 +79,7 @@ public class GUI extends javax.swing.JFrame {
 
         mailboxLabel.setText("Mailbox:");
 
-        title.setText("BULLY ALGORITHM");
+        title.setForeground(Color.RED);
         title.setAlignmentX(0.5F);
 
         selectMailbox.setText("select mailbox");
@@ -152,11 +153,21 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private void killActionPerformed(java.awt.event.ActionEvent evt) {
-        processHelpers.killProcess();
-        noOfProcesses = processHelpers.getNoOfProcesses();
-        processesLabel.setText("Number of processes alive: " + Integer.toString(noOfProcesses));
-        setProcessesListField(processHelpers.getIds());
+        if (noOfProcesses > 0) {
+            processHelpers.killProcess();
+            noOfProcesses = processHelpers.getNoOfProcesses();
+            processesLabel.setText("Number of processes alive: " + Integer.toString(noOfProcesses));
+            setProcessesListField(processHelpers.getIds());
+            title.setText("Coordinator Dead!!");
+            setEmptyTitle();
+        } else {
+             {
+                title.setText("No processes to kill!!");
+                setEmptyTitle();
+            }
 
+    
+        }
     }
 
     private void selectProcessActionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,11 +190,23 @@ public class GUI extends javax.swing.JFrame {
 
     }
 
-    void setProcessesListField(int[] ids) {
+    public void setProcessesListField(int[] ids) {
         selectProcess.removeAllItems();
         for (int i = 0; i < ids.length; i++) {
             selectProcess.addItem(ids[i]);
         }
+    }
+
+    public void setEmptyTitle() {
+        timer.schedule(
+                new java.util.TimerTask() {
+            @Override
+            public void run() {
+                title.setText("");
+            }
+        },
+                1000);
+
     }
     // Variables declaration - do not modify                     
     private javax.swing.JButton raise;
@@ -196,6 +219,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane mailboxScrollPane;
     private javax.swing.JTextArea mailboxTextArea;
-    // End of variables declaration  
 
+    // End of variables declaration  
 }
